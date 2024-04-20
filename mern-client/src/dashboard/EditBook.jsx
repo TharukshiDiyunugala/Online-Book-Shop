@@ -46,7 +46,7 @@ const EditBook = () => {
     
     //console.log(bookObj);
     // update book data
-    fetch(`http://localhost:5000/book/${id}`,{
+    fetch(`http://localhost:4000/book/${id}`,{
       method:'PATCH',
       headers:{
         "Content-Type": "application/json"

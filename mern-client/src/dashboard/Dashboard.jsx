@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [books, setBooks] = useState([]);
   useEffect(()=>{
 
-    fetch("http://localhost:5000/all-books").then(res =>res.json()).then(data=>setBooks(data));
+    fetch("http://localhost:4000/all-books").then(res =>res.json()).then(data=>setBooks(data));
   },[])
   return (
     <div className='mt-10 px-4 lg:px24'>

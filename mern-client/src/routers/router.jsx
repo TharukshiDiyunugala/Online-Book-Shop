@@ -44,7 +44,7 @@ import SearchedBook from "../components/SearchedBook";
         {
           path: "/book/:id",
           element: <SingleBook/>,
-          loader: ({params}) => fetch(`http://localhost:5000/book/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:4000/book/${params.id}`)
         },
     ]
     },
@@ -68,7 +68,7 @@ import SearchedBook from "../components/SearchedBook";
       {
         path:"/admin/dashboard/edit-books/:id",
         element: <EditBook/>,
-        loader: ({params}) => fetch(`http://localhost:5000/book/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:4000/book/${params.id}`)
       }
     ]
     },
