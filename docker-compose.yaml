@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./mern-servers
+    ports:
+      - "4001:4000"
+    volumes:
+      - ./mern-servers:/app
+    command: npm start
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./mern-client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./mern-client:/app
+    command: npm run dev
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
