@@ -5,7 +5,7 @@ pipeline {
         DOCKER_REGISTRY = 'your-docker-registry'
         DOCKER_IMAGE_BACKEND = 'online-book-shop-backend'
         DOCKER_IMAGE_FRONTEND = 'online-book-shop-frontend'
-        DOCKER_CREDENTIALS_ID = 'docker-credentials-id'
+        DOCKER_CREDENTIALS_ID = '12345'
         GIT_REPO = 'https://github.com/TharukshiDiyunugala/Online-Book-Shop.git'
     }
 
