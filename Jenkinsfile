@@ -2,9 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY = 'your-docker-registry'
-        DOCKER_IMAGE_BACKEND = 'online-book-shop-backend'
-        DOCKER_IMAGE_FRONTEND = 'online-book-shop-frontend'
+        DOCKER_IMAGE_BACKEND = 'tharukshidiyunugala/online-book-shop-backend'
+        DOCKER_IMAGE_FRONTEND = 'tharukshidiyunugala/online-book-shop-frontend'
         DOCKER_CREDENTIALS_ID = '12345'
         GIT_REPO = 'https://github.com/TharukshiDiyunugala/Online-Book-Shop.git'
     }
@@ -28,7 +27,7 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script {
-                    docker.withRegistry("https://${env.DOCKER_REGISTRY}", env.DOCKER_CREDENTIALS_ID) {
+                    docker.withRegistry('', env.DOCKER_CREDENTIALS_ID) {
                         docker.image("${env.DOCKER_IMAGE_BACKEND}").push()
                         docker.image("${env.DOCKER_IMAGE_FRONTEND}").push()
                     }
@@ -39,9 +38,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Ensure Docker Compose is installed on the server
-                    sh 'docker-compose down'
-                    sh 'docker-compose up -d'
+                    if (isUnix()) {
+                        sh 'docker-compose down'
+                        sh 'docker-compose up -d'
+                    } else {
+                        bat 'docker-compose down'
+                        bat 'docker-compose up -d'
+                    }
                 }
             }
         }
