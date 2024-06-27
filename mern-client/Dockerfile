@@ -1,20 +1,24 @@
-# Start with a base Node.js image suitable for your application
+# Dockerfile for frontend
 FROM node:16
 
-# Set the working directory
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json/yarn.lock
+# Install app dependencies
 COPY package*.json ./
+RUN npm install
 
-# Install dependencies
-RUN npm ci
-
-# Copy the rest of your application code
+# Bundle app source
 COPY . .
 
-# Expose the port your app runs on
+# Build the app
+RUN npm run build
+
+# Install a simple HTTP server to serve the app
+RUN npm install -g serve
+
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run your application
-CMD ["npm", "run", "dev"]
+# Command to run the app
+CMD ["serve", "-s", "build"]
